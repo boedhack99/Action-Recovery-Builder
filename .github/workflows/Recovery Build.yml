@@ -6,11 +6,11 @@ on:
       MANIFEST_URL:
         description: 'MANIFEST_URL (if using SSH keys, use git@github.com:repo URL format)'
         required: true
-        default: 'https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git'
+        default: 'https://github.com/boedhack99/platform_manifest_twrp_aosp.git'
       MANIFEST_BRANCH:
         description: 'MANIFEST_BRANCH'
         required: true
-        default: 'twrp-12.1'
+        default: 'twrp-13'
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
