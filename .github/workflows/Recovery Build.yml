@@ -40,7 +40,7 @@ on:
       BUILD_TARGET:
         description: 'BUILD_TARGET'
         required: true
-        default: 'vendorboot'
+        default: 'vendor_boot'
 
 jobs:
   build:
@@ -157,7 +157,7 @@ jobs:
       run: |
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
-        lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && make ${{ github.event.inputs.BUILD_TARGET }}image -j$(nproc --all)
+        lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && mka vendorbootimage -j$(nproc --all)
       working-directory: ${{ steps.pwd.outputs.pwd }}
 
     - name: Upload to Release
