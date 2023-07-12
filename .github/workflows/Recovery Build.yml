@@ -29,10 +29,6 @@ on:
       COMMON_PATH:
         description: 'COMMON_PATH (if no common tree, leave blank)'
         required: false
-      COMMON_NAME:
-        description: 'COMMON_NAME'
-        required: true
-        default: 'miholi'
       DEVICE_NAME:
         description: 'DEVICE_NAME'
         required: true
@@ -55,7 +51,6 @@ jobs:
       run: |
         echo "::group::User Environment Variables"
         echo "Manifest URL: ${{ github.event.inputs.MANIFEST_URL }}"
-        echo "Common Name: ${{ github.event.inputs.COMMON_NAME }}"
         echo "Manifest Branch: ${{ github.event.inputs.MANIFEST_BRANCH }}"
         echo "Device Tree URL: ${{ github.event.inputs.DEVICE_TREE_URL }}"
         echo "Device Tree Branch: ${{ github.event.inputs.DEVICE_TREE_BRANCH }}"
@@ -168,7 +163,7 @@ jobs:
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: workspace/out/target/product/${{ github.event.inputs.COMMON_NAME }}/${{ github.event.inputs.BUILD_TARGET }}.img
+        files: workspace/out/target/product/${{ github.event.inputs.DEVICE_NAME }}/${{ github.event.inputs.BUILD_TARGET }}.img
         name: ${{ github.event.inputs.DEVICE_NAME }}-${{ github.run_id }}
         tag_name: ${{ github.run_id }}
         body: |
