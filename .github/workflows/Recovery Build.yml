@@ -14,15 +14,15 @@ on:
       DEVICE_TREE_URL:
         description: 'DEVICE_TREE_URL'
         required: true
-        default: 'https://github.com/boedhack99/device_xiaomi_taoyao-TWRP'
+        default: 'https://github.com/boedhack99/device_xiaomi_xun-TWRP'
       DEVICE_TREE_BRANCH:
         description: 'DEVICE_TREE_BRANCH'
         required: true
-        default: 'android-12.1'
+        default: 'twrp-12.1'
       DEVICE_PATH:
         description: 'DEVICE_PATH'
         required: true
-        default: 'device/xiaomi/taoyao'
+        default: 'device/xiaomi/xun'
       COMMON_TREE_URL:
         description: 'COMMON_TREE_URL (if no common tree, leave blank)'
         required: false
@@ -32,15 +32,15 @@ on:
       DEVICE_NAME:
         description: 'DEVICE_NAME'
         required: true
-        default: 'taoyao'
+        default: 'xun'
       MAKEFILE_NAME:
         description: 'MAKEFILE_NAME'
         required: true
-        default: 'twrp_taoyao'
+        default: 'twrp_xun'
       BUILD_TARGET:
         description: 'BUILD_TARGET'
         required: true
-        default: 'boot'
+        default: 'recovery'
 
 jobs:
   build:
@@ -157,13 +157,13 @@ jobs:
       run: |
         source build/envsetup.sh
         export ALLOW_MISSING_DEPENDENCIES=true
-        lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && mka bootimage -j$(nproc --all)
+        lunch ${{ github.event.inputs.MAKEFILE_NAME }}-eng && make clean && mka recoveryimage -j$(nproc --all)
       working-directory: ${{ steps.pwd.outputs.pwd }}
 
     - name: Upload to Release
       uses: softprops/action-gh-release@v1
       with:
-        files: workspace/out/target/product/miholi/${{ github.event.inputs.BUILD_TARGET }}.img
+        files: workspace/out/target/product/xun/${{ github.event.inputs.BUILD_TARGET }}.img
         name: ${{ github.event.inputs.DEVICE_NAME }}-${{ github.run_id }}
         tag_name: ${{ github.run_id }}
         body: |
